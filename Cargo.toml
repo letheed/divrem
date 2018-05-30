@@ -1,0 +1,9 @@
+[package]
+name = "divrem"
+version = "0.1.0"
+authors = ["letheed <letheed@outlook.com>"]
+description = "Division and modulus variants"
+repository = "https://github.com/letheed/divrem"
+readme = "README.md"
+keywords = ["division", "modulus", "no_std"]
+license = "MIT"

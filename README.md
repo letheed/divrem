@@ -1,5 +1,7 @@
 # DivRem
 
+[Documentation][gh-pages]
+
 Rust library providing division and modulus variants not available in the standard library:
 
 * Floored division and remainder
@@ -11,3 +13,5 @@ For every definition, we provide a `Div`, a `Rem` and a `DivRem` variant.
 A `DivRem` variant of the truncated division is also provided for convenience since it does not exist in the standard library.
 
 This crate is `no_std`.
+
+[gh-pages]: https://letheed.github.io/divrem/divrem/

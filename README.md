@@ -1,6 +1,6 @@
 # DivRem
 
-[Documentation][gh-pages]
+[Documentation][docs-rs]
 
 Rust library providing division and modulus variants not available in the standard library:
 
@@ -14,4 +14,4 @@ A `DivRem` variant of the truncated division is also provided for convenience si
 
 This crate is `no_std`.
 
-[gh-pages]: https://letheed.github.io/divrem/divrem/
+[docs-rs]: https://docs.rs/divrem

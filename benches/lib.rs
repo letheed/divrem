@@ -218,7 +218,7 @@ macro_rules! test_algos_eq {
         #[test]
         fn $test_name() {
             let mut table = Vec::new();
-            for f in $functions.iter() {
+            for f in &$functions {
                 let mut results = Vec::new();
                 for x in 0..32 {
                     for y in 1..x + 4 {

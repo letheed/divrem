@@ -5,31 +5,31 @@ extern crate divrem;
 extern crate test;
 
 #[cfg_attr(rustfmt, rustfmt_skip)]
-static XY: [(i32, i32); 8] =
+const XY: [(i32, i32); 8] =
     [ (8, 3), (8, -3), (-8, 3), (-8, -3)
     , (1, 2), (1, -2), (-1, 2), (-1, -2)
     ];
 
 #[cfg_attr(rustfmt, rustfmt_skip)]
-static QR_TRUNC: [(i32, i32); 8] =
+const QR_TRUNC: [(i32, i32); 8] =
     [ (2, 2), (-2, 2), (-2, -2), (2, -2)
     , (0, 1), (0, 1), (0, -1), (0, -1)
     ];
 
 #[cfg_attr(rustfmt, rustfmt_skip)]
-static QR_FLOOR: [(i32, i32); 8] =
+const QR_FLOOR: [(i32, i32); 8] =
     [ (2, 2), (-3, -1), (-3, 1), (2, -2)
     , (0, 1), (-1, -1), (-1, 1), (0, -1)
     ];
 
 #[cfg_attr(rustfmt, rustfmt_skip)]
-static QR_CEIL: [(i32, i32); 8] =
+const QR_CEIL: [(i32, i32); 8] =
     [ (3, -1), (-2, 2), (-2, -2), (3, 1)
     , (1, -1), (0, 1), (0, -1), (1, 1)
     ];
 
 #[cfg_attr(rustfmt, rustfmt_skip)]
-static QR_EUCLID: [(i32, i32); 8] =
+const QR_EUCLID: [(i32, i32); 8] =
     [ (2, 2), (-2, 2), (-3, 1), (3, 1)
     , (0, 1), (0, 1), (-1, 1), (1, 1)
     ];
@@ -122,7 +122,7 @@ mod signed {
             fn $test_name() {
                 use super::{$table, XY};
 
-                for (&(x, y), &tqr) in XY.iter().zip($table.iter()) {
+                for (&(x, y), &tqr) in XY.iter().zip(&$table) {
                     let q = concat_idents!(div_, $variant)(x, y);
                     let r = concat_idents!(rem_, $variant)(x, y);
                     let qr = concat_idents!(div_rem_, $variant)(x, y);
@@ -142,8 +142,8 @@ mod signed {
         ($test_name:ident, $function:ident) => {
             #[test]
             fn $test_name() {
-                for x in 0i32..32 {
-                    for y in 1i32..x + 4 {
+                for x in 0_i32..32 {
+                    for y in 1_i32..x + 4 {
                         assert_eq!(x.$function(y), $function(x, y));
                         assert_eq!(x.$function(-y), $function(x, -y));
                         assert_eq!((-x).$function(y), $function(-x, y));
@@ -197,8 +197,8 @@ mod unsigned {
         ($test_name:ident, $function:ident) => {
             #[test]
             fn $test_name() {
-                for x in 0u32..32 {
-                    for y in 1u32..x + 4 {
+                for x in 0_u32..32 {
+                    for y in 1_u32..x + 4 {
                         assert_eq!(x.$function(y), $function(x, y));
                     }
                 }
@@ -219,8 +219,8 @@ mod unsigned {
         ($test_name:ident, $function:ident) => {
             #[test]
             fn $test_name() {
-                for x in 0u32..32 {
-                    for y in 1u32..x + 4 {
+                for x in 0_u32..32 {
+                    for y in 1_u32..x + 4 {
                         let (x, y) = (Wrap(x), Wrap(y));
                         assert_eq!(x.$function(y), $function(x, y));
                     }

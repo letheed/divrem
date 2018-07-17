@@ -164,6 +164,9 @@ macro_rules! bench_loop {
         for x in 0..1024 {
             for y in 1..x + 4 {
                 sum += $function(x, y);
+                sum += $function(x, -y);
+                sum += $function(-x, y);
+                sum += $function(-x, -y);
             }
         }
         sum

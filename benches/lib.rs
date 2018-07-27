@@ -238,22 +238,10 @@ macro_rules! test_algos_eq {
     };
 }
 
-test_algos_eq!(
-    test_algos_eq_div_floor,
-    [div_floor1, div_floor2, div_floor3]
-);
-test_algos_eq!(
-    test_algos_eq_rem_floor,
-    [rem_floor1, rem_floor2, rem_floor3]
-);
-test_algos_eq!(
-    test_algos_eq_div_rem_floor,
-    [div_rem_floor1, div_rem_floor2, div_rem_floor3]
-);
+test_algos_eq!(test_algos_eq_div_floor, [div_floor1, div_floor2, div_floor3]);
+test_algos_eq!(test_algos_eq_rem_floor, [rem_floor1, rem_floor2, rem_floor3]);
+test_algos_eq!(test_algos_eq_div_rem_floor, [div_rem_floor1, div_rem_floor2, div_rem_floor3]);
 
 test_algos_eq!(test_algos_eq_div_ceil, [div_ceil1, div_ceil2, div_ceil3]);
 test_algos_eq!(test_algos_eq_rem_ceil, [rem_ceil1, rem_ceil2, rem_ceil3]);
-test_algos_eq!(
-    test_algos_eq_div_rem_ceil,
-    [div_rem_ceil1, div_rem_ceil2, div_rem_ceil3]
-);
+test_algos_eq!(test_algos_eq_div_rem_ceil, [div_rem_ceil1, div_rem_ceil2, div_rem_ceil3]);

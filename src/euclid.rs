@@ -2,6 +2,7 @@ mod div {
     mod signed {
         use core::num::Wrapping;
         use core::ops::Div;
+
         use {DivEuclid, DivRem};
 
         macro_rules! impl_div_euclid_signed {
@@ -36,6 +37,7 @@ mod div {
     mod unsigned {
         use core::num::Wrapping;
         use core::ops::Div;
+
         use DivEuclid;
 
         macro_rules! impl_div_euclid_unsigned {
@@ -63,6 +65,7 @@ mod rem {
     mod signed {
         use core::num::Wrapping;
         use core::ops::Rem;
+
         use RemEuclid;
 
         macro_rules! impl_rem_euclid_signed {
@@ -97,6 +100,7 @@ mod rem {
     mod unsigned {
         use core::num::Wrapping;
         use core::ops::Rem;
+
         use RemEuclid;
 
         macro_rules! impl_rem_euclid_unsigned {
@@ -123,6 +127,7 @@ mod rem {
 mod divrem {
     mod signed {
         use core::num::Wrapping;
+
         use {DivRem, DivRemEuclid};
 
         macro_rules! impl_div_rem_euclid_signed {
@@ -156,6 +161,7 @@ mod divrem {
 
     mod unsigned {
         use core::num::Wrapping;
+
         use {DivRem, DivRemEuclid};
 
         macro_rules! impl_div_rem_euclid_unsigned {

@@ -1,6 +1,7 @@
-use super::DivRem;
 use core::num::Wrapping;
 use core::ops::{Div, Rem};
+
+use super::DivRem;
 
 macro_rules! impl_div_rem_trunc {
     ($t:ty) => {

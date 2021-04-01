@@ -2,6 +2,7 @@ mod div {
     mod signed {
         use core::num::Wrapping;
         use core::ops::Div;
+
         use DivFloor;
 
         macro_rules! impl_div_floor_signed {
@@ -33,6 +34,7 @@ mod div {
     mod unsigned {
         use core::num::Wrapping;
         use core::ops::Div;
+
         use DivFloor;
 
         macro_rules! impl_div_floor_unsigned {
@@ -60,6 +62,7 @@ mod rem {
     mod signed {
         use core::num::Wrapping;
         use core::ops::Rem;
+
         use RemFloor;
 
         macro_rules! impl_rem_floor_signed {
@@ -91,6 +94,7 @@ mod rem {
     mod unsigned {
         use core::num::Wrapping;
         use core::ops::Rem;
+
         use RemFloor;
 
         macro_rules! impl_rem_floor_unsigned {
@@ -117,6 +121,7 @@ mod rem {
 mod divrem {
     mod signed {
         use core::num::Wrapping;
+
         use {DivRem, DivRemFloor};
 
         macro_rules! impl_div_rem_floor_signed {
@@ -149,6 +154,7 @@ mod divrem {
 
     mod unsigned {
         use core::num::Wrapping;
+
         use {DivRem, DivRemFloor};
 
         macro_rules! impl_div_rem_floor_unsigned {

@@ -2,6 +2,7 @@ mod div {
     mod signed {
         use core::num::Wrapping;
         use core::ops::Div;
+
         use DivCeil;
 
         macro_rules! impl_div_ceil_signed {
@@ -33,6 +34,7 @@ mod div {
     mod unsigned {
         use core::num::Wrapping;
         use core::ops::Div;
+
         use DivCeil;
 
         macro_rules! impl_div_ceil_unsigned {
@@ -64,6 +66,7 @@ mod rem {
     mod signed {
         use core::num::Wrapping;
         use core::ops::Rem;
+
         use RemCeil;
 
         macro_rules! impl_rem_ceil_signed {
@@ -95,6 +98,7 @@ mod rem {
     mod unsigned {
         use core::num::Wrapping;
         use core::ops::Rem;
+
         use RemCeil;
 
         macro_rules! impl_rem_ceil_unsigned {
@@ -126,6 +130,7 @@ mod rem {
 mod divrem {
     mod signed {
         use core::num::Wrapping;
+
         use {DivRem, DivRemCeil};
 
         macro_rules! impl_div_rem_ceil_signed {
@@ -158,6 +163,7 @@ mod divrem {
 
     mod unsigned {
         use core::num::Wrapping;
+
         use {DivRem, DivRemCeil};
 
         macro_rules! impl_div_rem_ceil_unsigned {

@@ -3,7 +3,7 @@ mod div {
         use core::num::Wrapping;
         use core::ops::Div;
 
-        use DivCeil;
+        use crate::DivCeil;
 
         macro_rules! impl_div_ceil_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -35,7 +35,7 @@ mod div {
         use core::num::Wrapping;
         use core::ops::Div;
 
-        use DivCeil;
+        use crate::DivCeil;
 
         macro_rules! impl_div_ceil_unsigned {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -67,7 +67,7 @@ mod rem {
         use core::num::Wrapping;
         use core::ops::Rem;
 
-        use RemCeil;
+        use crate::RemCeil;
 
         macro_rules! impl_rem_ceil_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -99,7 +99,7 @@ mod rem {
         use core::num::Wrapping;
         use core::ops::Rem;
 
-        use RemCeil;
+        use crate::RemCeil;
 
         macro_rules! impl_rem_ceil_unsigned {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -131,7 +131,7 @@ mod divrem {
     mod signed {
         use core::num::Wrapping;
 
-        use {DivRem, DivRemCeil};
+        use crate::{DivRem, DivRemCeil};
 
         macro_rules! impl_div_rem_ceil_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -164,7 +164,7 @@ mod divrem {
     mod unsigned {
         use core::num::Wrapping;
 
-        use {DivRem, DivRemCeil};
+        use crate::{DivRem, DivRemCeil};
 
         macro_rules! impl_div_rem_ceil_unsigned {
             ($t:ty, $zero:expr, $one:expr) => {

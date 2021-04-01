@@ -3,7 +3,7 @@ mod div {
         use core::num::Wrapping;
         use core::ops::Div;
 
-        use DivFloor;
+        use crate::DivFloor;
 
         macro_rules! impl_div_floor_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -35,7 +35,7 @@ mod div {
         use core::num::Wrapping;
         use core::ops::Div;
 
-        use DivFloor;
+        use crate::DivFloor;
 
         macro_rules! impl_div_floor_unsigned {
             ($t:ty) => {
@@ -63,7 +63,7 @@ mod rem {
         use core::num::Wrapping;
         use core::ops::Rem;
 
-        use RemFloor;
+        use crate::RemFloor;
 
         macro_rules! impl_rem_floor_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -95,7 +95,7 @@ mod rem {
         use core::num::Wrapping;
         use core::ops::Rem;
 
-        use RemFloor;
+        use crate::RemFloor;
 
         macro_rules! impl_rem_floor_unsigned {
             ($t:ty) => {
@@ -122,7 +122,7 @@ mod divrem {
     mod signed {
         use core::num::Wrapping;
 
-        use {DivRem, DivRemFloor};
+        use crate::{DivRem, DivRemFloor};
 
         macro_rules! impl_div_rem_floor_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -155,7 +155,7 @@ mod divrem {
     mod unsigned {
         use core::num::Wrapping;
 
-        use {DivRem, DivRemFloor};
+        use crate::{DivRem, DivRemFloor};
 
         macro_rules! impl_div_rem_floor_unsigned {
             ($t:ty) => {

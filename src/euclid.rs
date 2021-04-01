@@ -3,7 +3,7 @@ mod div {
         use core::num::Wrapping;
         use core::ops::Div;
 
-        use {DivEuclid, DivRem};
+        use crate::{DivEuclid, DivRem};
 
         macro_rules! impl_div_euclid_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -38,7 +38,7 @@ mod div {
         use core::num::Wrapping;
         use core::ops::Div;
 
-        use DivEuclid;
+        use crate::DivEuclid;
 
         macro_rules! impl_div_euclid_unsigned {
             ($t:ty) => {
@@ -66,7 +66,7 @@ mod rem {
         use core::num::Wrapping;
         use core::ops::Rem;
 
-        use RemEuclid;
+        use crate::RemEuclid;
 
         macro_rules! impl_rem_euclid_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -101,7 +101,7 @@ mod rem {
         use core::num::Wrapping;
         use core::ops::Rem;
 
-        use RemEuclid;
+        use crate::RemEuclid;
 
         macro_rules! impl_rem_euclid_unsigned {
             ($t:ty) => {
@@ -128,7 +128,7 @@ mod divrem {
     mod signed {
         use core::num::Wrapping;
 
-        use {DivRem, DivRemEuclid};
+        use crate::{DivRem, DivRemEuclid};
 
         macro_rules! impl_div_rem_euclid_signed {
             ($t:ty, $zero:expr, $one:expr) => {
@@ -162,7 +162,7 @@ mod divrem {
     mod unsigned {
         use core::num::Wrapping;
 
-        use {DivRem, DivRemEuclid};
+        use crate::{DivRem, DivRemEuclid};
 
         macro_rules! impl_div_rem_euclid_unsigned {
             ($t:ty) => {

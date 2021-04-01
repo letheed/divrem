@@ -4,31 +4,31 @@
 extern crate divrem;
 extern crate test;
 
-#[cfg_attr(rustfmt, rustfmt_skip)]
+#[rustfmt::skip]
 const XY: [(i32, i32); 8] =
     [ (8, 3), (8, -3), (-8, 3), (-8, -3)
     , (1, 2), (1, -2), (-1, 2), (-1, -2)
     ];
 
-#[cfg_attr(rustfmt, rustfmt_skip)]
+#[rustfmt::skip]
 const QR_TRUNC: [(i32, i32); 8] =
     [ (2, 2), (-2, 2), (-2, -2), (2, -2)
     , (0, 1), (0, 1), (0, -1), (0, -1)
     ];
 
-#[cfg_attr(rustfmt, rustfmt_skip)]
+#[rustfmt::skip]
 const QR_FLOOR: [(i32, i32); 8] =
     [ (2, 2), (-3, -1), (-3, 1), (2, -2)
     , (0, 1), (-1, -1), (-1, 1), (0, -1)
     ];
 
-#[cfg_attr(rustfmt, rustfmt_skip)]
+#[rustfmt::skip]
 const QR_CEIL: [(i32, i32); 8] =
     [ (3, -1), (-2, 2), (-2, -2), (3, 1)
     , (1, -1), (0, 1), (0, -1), (1, 1)
     ];
 
-#[cfg_attr(rustfmt, rustfmt_skip)]
+#[rustfmt::skip]
 const QR_EUCLID: [(i32, i32); 8] =
     [ (2, 2), (-2, 2), (-3, 1), (3, 1)
     , (0, 1), (0, 1), (-1, 1), (1, 1)

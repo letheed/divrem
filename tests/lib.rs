@@ -1,8 +1,6 @@
-#![feature(test)]
 #![feature(concat_idents)]
 
 extern crate divrem;
-extern crate test;
 
 #[rustfmt::skip]
 const XY: [(i32, i32); 8] =

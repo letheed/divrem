@@ -1,6 +1,10 @@
+#![warn(rust_2018_idioms)]
+#![warn(clippy::pedantic)]
+#![warn(clippy::cargo)]
+#![warn(clippy::nursery)]
+#![allow(clippy::missing_const_for_fn)]
 #![feature(test)]
 
-extern crate divrem;
 extern crate test;
 
 use divrem::DivRem;
@@ -11,12 +15,12 @@ use test::Bencher;
 
 #[inline]
 fn div_floor1(self_: i32, other: i32) -> i32 {
-    self_.div_floor(other)
+    DivFloor::div_floor(self_, other)
 }
 
 #[inline]
 fn div_floor2(self_: i32, other: i32) -> i32 {
-    match self_.div_rem(other) {
+    match DivRem::div_rem(self_, other) {
         (q, r) if (r > 0 && other < 0) || (r < 0 && other > 0) => q - 1,
         (q, _) => q,
     }
@@ -24,7 +28,7 @@ fn div_floor2(self_: i32, other: i32) -> i32 {
 
 #[inline]
 fn div_floor3(self_: i32, other: i32) -> i32 {
-    match self_.div_rem(other) {
+    match DivRem::div_rem(self_, other) {
         (q, r) if r.signum() == -other.signum() => q - 1,
         (q, _) => q,
     }
@@ -32,7 +36,7 @@ fn div_floor3(self_: i32, other: i32) -> i32 {
 
 #[inline]
 fn rem_floor1(self_: i32, other: i32) -> i32 {
-    self_.rem_floor(other)
+    RemFloor::rem_floor(self_, other)
 }
 
 #[inline]
@@ -57,12 +61,12 @@ fn rem_floor3(self_: i32, other: i32) -> i32 {
 
 #[inline]
 fn div_rem_floor1(self_: i32, other: i32) -> (i32, i32) {
-    self_.div_rem_floor(other)
+    DivRemFloor::div_rem_floor(self_, other)
 }
 
 #[inline]
 fn div_rem_floor2(self_: i32, other: i32) -> (i32, i32) {
-    match self_.div_rem(other) {
+    match DivRem::div_rem(self_, other) {
         (q, r) if (r > 0 && other < 0) || (r < 0 && other > 0) => (q - 1, r + other),
         (q, r) => (q, r),
     }
@@ -70,7 +74,7 @@ fn div_rem_floor2(self_: i32, other: i32) -> (i32, i32) {
 
 #[inline]
 fn div_rem_floor3(self_: i32, other: i32) -> (i32, i32) {
-    match self_.div_rem(other) {
+    match DivRem::div_rem(self_, other) {
         (q, r) if r.signum() == -other.signum() => (q - 1, r + other),
         (q, r) => (q, r),
     }
@@ -78,12 +82,12 @@ fn div_rem_floor3(self_: i32, other: i32) -> (i32, i32) {
 
 #[inline]
 fn div_ceil1(self_: i32, other: i32) -> i32 {
-    self_.div_ceil(other)
+    DivCeil::div_ceil(self_, other)
 }
 
 #[inline]
 fn div_ceil2(self_: i32, other: i32) -> i32 {
-    match self_.div_rem(other) {
+    match DivRem::div_rem(self_, other) {
         (q, r) if (r > 0 && other > 0) || (r < 0 && other < 0) => q + 1,
         (q, _) => q,
     }
@@ -91,7 +95,7 @@ fn div_ceil2(self_: i32, other: i32) -> i32 {
 
 #[inline]
 fn div_ceil3(self_: i32, other: i32) -> i32 {
-    match self_.div_rem(other) {
+    match DivRem::div_rem(self_, other) {
         (q, r) if r.signum() == other.signum() => q + 1,
         (q, _) => q,
     }
@@ -99,7 +103,7 @@ fn div_ceil3(self_: i32, other: i32) -> i32 {
 
 #[inline]
 fn rem_ceil1(self_: i32, other: i32) -> i32 {
-    self_.rem_ceil(other)
+    RemCeil::rem_ceil(self_, other)
 }
 
 #[inline]
@@ -124,12 +128,12 @@ fn rem_ceil3(self_: i32, other: i32) -> i32 {
 
 #[inline]
 fn div_rem_ceil1(self_: i32, other: i32) -> (i32, i32) {
-    self_.div_rem_ceil(other)
+    DivRemCeil::div_rem_ceil(self_, other)
 }
 
 #[inline]
 fn div_rem_ceil2(self_: i32, other: i32) -> (i32, i32) {
-    match self_.div_rem(other) {
+    match DivRem::div_rem(self_, other) {
         (q, r) if (r > 0 && other > 0) || (r < 0 && other < 0) => (q + 1, r - other),
         (q, r) => (q, r),
     }
@@ -137,7 +141,7 @@ fn div_rem_ceil2(self_: i32, other: i32) -> (i32, i32) {
 
 #[inline]
 fn div_rem_ceil3(self_: i32, other: i32) -> (i32, i32) {
-    match self_.div_rem(other) {
+    match DivRem::div_rem(self_, other) {
         (q, r) if r.signum() == other.signum() => (q + 1, r - other),
         (q, r) => (q, r),
     }
@@ -145,20 +149,20 @@ fn div_rem_ceil3(self_: i32, other: i32) -> (i32, i32) {
 
 #[inline]
 fn div_euclid1(self_: i32, other: i32) -> i32 {
-    self_.div_euclid(other)
+    DivEuclid::div_euclid(self_, other)
 }
 
 #[inline]
 fn rem_euclid1(self_: i32, other: i32) -> i32 {
-    self_.rem_euclid(other)
+    RemEuclid::rem_euclid(self_, other)
 }
 
 #[inline]
 fn div_rem_euclid1(self_: i32, other: i32) -> (i32, i32) {
-    self_.div_rem_euclid(other)
+    DivRemEuclid::div_rem_euclid(self_, other)
 }
 
-macro_rules! bench_loop {
+macro_rules! bench_loop_inner {
     ($function:expr) => {{
         let mut sum = 0;
         for x in 0..1024 {
@@ -173,12 +177,12 @@ macro_rules! bench_loop {
     }};
 }
 
-macro_rules! bench_work {
+macro_rules! bench_loop {
     ($function:expr,1) => {
-        bench_loop!($function)
+        bench_loop_inner!($function)
     };
     ($function:expr,2) => {
-        bench_loop!(|x, y| {
+        bench_loop_inner!(|x, y| {
             let (q, r) = $function(x, y);
             q + r
         })
@@ -189,7 +193,7 @@ macro_rules! bench {
     ($bench_name:ident, $function:ident, $n:tt) => {
         #[bench]
         fn $bench_name(b: &mut Bencher) {
-            b.iter(|| bench_work!($function, $n));
+            b.iter(|| bench_loop!($function, $n));
         }
     };
 }

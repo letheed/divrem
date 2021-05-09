@@ -1,6 +1,9 @@
+#![warn(rust_2018_idioms)]
+#![warn(clippy::pedantic)]
+#![warn(clippy::cargo)]
+#![warn(clippy::nursery)]
+#![allow(clippy::missing_const_for_fn)]
 #![feature(concat_idents)]
-
-extern crate divrem;
 
 #[rustfmt::skip]
 const XY: [(i32, i32); 8] =
@@ -83,7 +86,8 @@ mod signed {
     }
 
     fn div_rem_ceil(x: i32, y: i32) -> (i32, i32) {
-        let q = ((x as f32) / (y as f32)).ceil() as i32;
+        #[allow(clippy::cast_possible_truncation)] // ⌈x/y⌉ is an integer <= |x|.
+        let q = (f64::from(x) / f64::from(y)).ceil() as i32;
         let r = x - q * y;
         (q, r)
     }
@@ -99,7 +103,7 @@ mod signed {
     fn div_rem_euclid(x: i32, y: i32) -> (i32, i32) {
         let (mut q, mut r) = (x / y, x % y);
         // Euclid is mod dominant.
-        // A unique solution exists for r >= 0.
+        // A unique solution exists for r>=0.
         if r < 0 {
             if y > 0 {
                 q -= 1;
@@ -137,51 +141,57 @@ mod signed {
     test_table!(test_table_euclid, QR_EUCLID, euclid);
 
     macro_rules! test {
-        ($test_name:ident, $function:ident) => {
+        ($test_name:ident, $trait:ident, $function:ident) => {
             #[test]
             fn $test_name() {
                 for x in 0_i32..32 {
                     for y in 1_i32..x + 4 {
-                        assert_eq!(x.$function(y), $function(x, y));
-                        assert_eq!(x.$function(-y), $function(x, -y));
-                        assert_eq!((-x).$function(y), $function(-x, y));
-                        assert_eq!((-x).$function(-y), $function(-x, -y));
+                        assert_eq!($trait::$function(x, y), $function(x, y));
+                        assert_eq!($trait::$function(x, -y), $function(x, -y));
+                        assert_eq!($trait::$function(-x, y), $function(-x, y));
+                        assert_eq!($trait::$function(-x, -y), $function(-x, -y));
                     }
                 }
             }
         };
     }
 
-    test!(test_div_rem_trunc, div_rem);
-    test!(test_div_floor, div_floor);
-    test!(test_rem_floor, rem_floor);
-    test!(test_div_rem_floor, div_rem_floor);
-    test!(test_div_euclid, div_euclid);
-    test!(test_rem_euclid, rem_euclid);
-    test!(test_div_rem_euclid, div_rem_euclid);
-    test!(test_div_ceil, div_ceil);
-    test!(test_rem_ceil, rem_ceil);
-    test!(test_div_rem_ceil, div_rem_ceil);
+    test!(test_div_rem_trunc, DivRem, div_rem);
+    test!(test_div_floor, DivFloor, div_floor);
+    test!(test_rem_floor, RemFloor, rem_floor);
+    test!(test_div_rem_floor, DivRemFloor, div_rem_floor);
+    test!(test_div_euclid, DivEuclid, div_euclid);
+    test!(test_rem_euclid, RemEuclid, rem_euclid);
+    test!(test_div_rem_euclid, DivRemEuclid, div_rem_euclid);
+    test!(test_div_ceil, DivCeil, div_ceil);
+    test!(test_rem_ceil, RemCeil, rem_ceil);
+    test!(test_div_rem_ceil, DivRemCeil, div_rem_ceil);
 }
 
 mod unsigned {
+    use std::num::Wrapping;
+
     use divrem::DivRem;
     use divrem::{DivCeil, DivRemCeil, RemCeil};
     use divrem::{DivEuclid, DivRemEuclid, RemEuclid};
     use divrem::{DivFloor, DivRemFloor, RemFloor};
-    use std::num::Wrapping as Wrap;
 
     fn div_ceil(x: u32, y: u32) -> u32 {
-        ((x as f32) / (y as f32)).ceil() as u32
+        #[allow(clippy::cast_sign_loss)] // ∀x,y>=0 ⌈x/y⌉>=0.
+        #[allow(clippy::cast_possible_truncation)] // ⌈x/y⌉ is an integer <=x.
+        let q = (f64::from(x) / f64::from(y)).ceil() as u32;
+        q
     }
 
-    fn div_rem_ceil(x: Wrap<u32>, y: Wrap<u32>) -> (Wrap<u32>, Wrap<u32>) {
-        let q = Wrap(((x.0 as f32) / (y.0 as f32)).ceil() as u32);
+    fn div_rem_ceil(x: Wrapping<u32>, y: Wrapping<u32>) -> (Wrapping<u32>, Wrapping<u32>) {
+        #[allow(clippy::cast_sign_loss)] // ∀n,m>=0 ⌈n/m⌉>=0
+        #[allow(clippy::cast_possible_truncation)] // ⌈x/y⌉ is an integer <=x.
+        let q = Wrapping((f64::from(x.0) / f64::from(y.0)).ceil() as u32);
         let r = x - q * y;
         (q, r)
     }
 
-    fn rem_ceil(x: Wrap<u32>, y: Wrap<u32>) -> Wrap<u32> {
+    fn rem_ceil(x: Wrapping<u32>, y: Wrapping<u32>) -> Wrapping<u32> {
         div_rem_ceil(x, y).1
     }
 
@@ -192,41 +202,41 @@ mod unsigned {
     div_rem_functions!(u32);
 
     macro_rules! test {
-        ($test_name:ident, $function:ident) => {
+        ($test_name:ident, $trait:ident, $function:ident) => {
             #[test]
             fn $test_name() {
                 for x in 0_u32..32 {
                     for y in 1_u32..x + 4 {
-                        assert_eq!(x.$function(y), $function(x, y));
+                        assert_eq!($trait::$function(x, y), $function(x, y));
                     }
                 }
             }
         };
     }
 
-    test!(test_div_rem_trunc, div_rem);
-    test!(test_div_floor, div_floor);
-    test!(test_rem_floor, rem_floor);
-    test!(test_div_rem_floor, div_rem_floor);
-    test!(test_div_euclid, div_euclid);
-    test!(test_rem_euclid, rem_euclid);
-    test!(test_div_rem_euclid, div_rem_euclid);
-    test!(test_div_ceil, div_ceil);
+    test!(test_div_rem_trunc, DivRem, div_rem);
+    test!(test_div_floor, DivFloor, div_floor);
+    test!(test_rem_floor, RemFloor, rem_floor);
+    test!(test_div_rem_floor, DivRemFloor, div_rem_floor);
+    test!(test_div_euclid, DivEuclid, div_euclid);
+    test!(test_rem_euclid, RemEuclid, rem_euclid);
+    test!(test_div_rem_euclid, DivRemEuclid, div_rem_euclid);
+    test!(test_div_ceil, DivCeil, div_ceil);
 
     macro_rules! test_wrap {
-        ($test_name:ident, $function:ident) => {
+        ($test_name:ident, $trait:ident, $function:ident) => {
             #[test]
             fn $test_name() {
                 for x in 0_u32..32 {
                     for y in 1_u32..x + 4 {
-                        let (x, y) = (Wrap(x), Wrap(y));
-                        assert_eq!(x.$function(y), $function(x, y));
+                        let (x, y) = (Wrapping(x), Wrapping(y));
+                        assert_eq!($trait::$function(x, y), $function(x, y));
                     }
                 }
             }
         };
     }
 
-    test_wrap!(test_rem_ceil, rem_ceil);
-    test_wrap!(test_div_rem_ceil, div_rem_ceil);
+    test_wrap!(test_rem_ceil, RemCeil, rem_ceil);
+    test_wrap!(test_div_rem_ceil, DivRemCeil, div_rem_ceil);
 }

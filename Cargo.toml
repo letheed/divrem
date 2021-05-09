@@ -7,5 +7,6 @@ documentation = "https://docs.rs/divrem"
 repository = "https://github.com/letheed/divrem"
 readme = "README.md"
 keywords = ["division", "modulus", "no_std"]
+categories = ["mathematics", "no-std"]
 license = "MIT"
 edition = "2018"

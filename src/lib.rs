@@ -18,6 +18,11 @@
 //! convenience since it does not exist in the standard library.
 
 #![warn(missing_docs)]
+#![warn(rust_2018_idioms)]
+#![warn(clippy::pedantic)]
+#![warn(clippy::cargo)]
+#![warn(clippy::nursery)]
+#![deny(unsafe_code)]
 #![no_std]
 
 use core::ops::{Div, Rem};

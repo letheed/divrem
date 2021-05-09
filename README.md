@@ -2,15 +2,15 @@
 
 [Documentation][docs-rs]
 
-Rust library providing division and modulus variants not available in the standard library:
+Rust library providing division and modulus variants:
 
-* Floored division and remainder
-* Ceiled division and remainder
-* Euclidian division and remaider
+* Floored division and remainder.
+* Ceiled division and remainder.
+* Euclidian division and remaider.
 
-For every definition, we provide a `Div`, a `Rem` and a `DivRem` variant.
+For every definition, we provide a `Div`, a `Rem` and a `DivRem` trait.
 
-A `DivRem` variant of the truncated division is also provided for convenience since it does not exist in the standard library.
+A `DivRem` variant of `std`’s truncated division is also provided for convenience.
 
 This crate is `no_std`.
 

@@ -1,6 +1,6 @@
 [package]
 name = "divrem"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Letheed <letheed@outlook.com>"]
 description = "Division and modulus variants"
 documentation = "https://docs.rs/divrem"

@@ -1,16 +1,16 @@
 //! Division and modulus traits and implementations.
 //!
-//! There exist many possible definitions of the division and modulus
+//! There are several definitions for the division and modulus
 //! functions, each with different properties.
 //! Probably the most common in computer science is truncated division
 //! (rounding towards zero) since it is the one provided by most processors
 //! and defined as the `/` (and matching `%`) operator in the ISO C99 standard.
 //!
-//! This crate provides other definitions:
+//! This crate provides the following definitions:
 //!
-//! * Floored division (rounding towards negative infinity)
-//! * Ceiled division (rounding towards positive infinity)
-//! * Euclidean division (sign of modulus is always positive)
+//! * Floored division (rounding towards negative infinity).
+//! * Ceiled division (rounding towards positive infinity).
+//! * Euclidean division (sign of modulus is always positive).
 //!
 //! For every definition, we provide a `Div`, a `Rem` and a `DivRem` variant.
 //!

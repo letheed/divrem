@@ -6,7 +6,7 @@ Rust library providing division and modulus variants:
 
 * Floored division and remainder.
 * Ceiled division and remainder.
-* Euclidian division and remaider.
+* Euclidean division and remainder.
 
 For every definition, we provide a `Div`, a `Rem` and a `DivRem` trait.
 

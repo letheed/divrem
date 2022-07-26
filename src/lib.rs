@@ -23,6 +23,7 @@
 #![warn(clippy::cargo)]
 #![warn(clippy::nursery)]
 #![deny(unsafe_code)]
+#![allow(clippy::use_self)]
 #![no_std]
 
 use core::ops::{Div, Rem};
